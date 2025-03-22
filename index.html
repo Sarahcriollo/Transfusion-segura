@@ -5,23 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Juego de Transfusión</title>
     <style>
-        body { text-align: center; font-family: Arial, sans-serif; }
+        body { 
+            text-align: center; 
+            font-family: Arial, sans-serif; 
+            background-color: red; 
+            color: white;
+        }
         .container { display: flex; justify-content: center; margin-top: 50px; }
-        .patient, .blood-bag { margin: 20px; padding: 20px; border: 2px solid black; cursor: pointer; }
+        .patient, .blood-bag { margin: 20px; padding: 20px; border: 2px solid black; cursor: pointer; background-color: white; color: black; }
+        img { width: 100px; height: auto; display: block; margin: 0 auto; }
     </style>
 </head>
 <body>
     <h1>Elige el paciente correcto para la transfusión</h1>
-    <div class="blood-bag" id="bloodBag">Tipo de Sangre: A+</div>
+    <div class="blood-bag" id="bloodBag">
+        <img src="blood-bag.png" alt="Bolsa de sangre">
+        <p>Número de Unidad: <strong>25030462</strong></p>
+        <p>Sello de Calidad: <strong>3255727</strong></p>
+        <p>Hemocomponente: <strong>Glóbulos pobre en leucocitos</strong></p>
+        <p>Cantidad: <strong>274 cc</strong></p>
+        <p>ABO Rh: <strong>O Positivo</strong></p>
+        <p>Compatibilidad: <strong>Compatible</strong></p>
+        <p><img src="quality-seal.png" alt="Sello de calidad"></p>
+    </div>
     <div class="container">
-        <div class="patient" id="patient1" data-blood="A+">Paciente 1: A+</div>
-        <div class="patient" id="patient2" data-blood="B-">Paciente 2: B-</div>
+        <div class="patient" id="patient1" data-blood="O+">
+            <img src="patient1.png" alt="Paciente Juan Pérez">
+            <p>Paciente: Juan Pérez</p>
+        </div>
+        <div class="patient" id="patient2" data-blood="A+">
+            <img src="patient2.png" alt="Paciente Juan Pérz">
+            <p>Paciente: Juan Pérz</p>
+        </div>
     </div>
     <p id="message"></p>
     <script>
         document.querySelectorAll('.patient').forEach(patient => {
             patient.addEventListener('click', function() {
-                let bloodType = document.getElementById('bloodBag').textContent.split(': ')[1];
+                let bloodType = document.getElementById('bloodBag').textContent.split('Tipo ABO Rh: ')[1].split('</p>')[0];
                 if (this.dataset.blood === bloodType) {
                     document.getElementById('message').textContent = '¡Correcto! El paciente es compatible.';
                 } else {
@@ -32,3 +53,4 @@
     </script>
 </body>
 </html>
+
